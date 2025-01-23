@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
 
     try {
         const notifications = await Notifications.findAll()
-        console.log("API Key:", process.env.OPENAI_API_KEY);
 
         res.json(notifications)
 
