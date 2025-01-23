@@ -1,8 +1,11 @@
 import { Router } from "express";
 import Expense from "../models/expenses.js";
 import Category from "../models/category.js";
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 const router = Router()
+
+router.use(authMiddlware)
 
 const getExpenseById = async ( id ) => {
 

@@ -1,7 +1,9 @@
 import { Router } from "express";
 import Category from "../models/category.js";
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 const router = Router()
+router.use(authMiddlware)
 
 
 

@@ -1,8 +1,9 @@
 import { Router } from "express";
 import Notifications from "../models/notifications.js";
-
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 const router = Router()
+router.use(authMiddlware)
 
 const getNotificationById = async (id) => {
     

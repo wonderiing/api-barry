@@ -1,9 +1,10 @@
 import { Router } from "express";
 import aiRecommendations from "../models/aiRecommendations.js";
-
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 
 const router = Router()
+router.use(authMiddlware)
 
 const getAiRecommendationById = async ( id ) => {
 

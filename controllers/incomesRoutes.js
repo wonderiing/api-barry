@@ -1,8 +1,11 @@
 import { Router } from "express";
 import Incomes from "../models/incomes.js";
 import User from "../models/usuario.js";
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 const router = Router()
+
+router.use(authMiddlware)
 
 const getIncomeById = async ( id ) => {
 

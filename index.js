@@ -8,6 +8,8 @@ import expensesRoutes from "./controllers/expensesRoutes.js"
 import aiRoutes from "./controllers/aiRoutes.js"
 import notificactionRoutes from "./controllers/notificactionRoutes.js"
 import cors  from "cors"
+import authController from "./controllers/authController.js"
+
 dotenv.config();
 
 const app = express();
@@ -22,6 +24,7 @@ app.use("/api/incomes", incomesRouter)
 app.use("/api/expenses", expensesRoutes)
 app.use("/api/ai", aiRoutes)
 app.use("/api/notifications", notificactionRoutes)
+app.use("/api/auth/", authController)
 
 const PORT = process.env.PORT || 3000;
 

@@ -1,8 +1,11 @@
 import { Router } from "express";
 import User from "../models/usuario.js";
+import authMiddlware from '../middlewares/authMiddleware.js'
 
 
 const router = Router();
+router.use(authMiddlware)
+
 
 //helper
 const getUserById = async (id) => {
@@ -21,16 +24,6 @@ router.get("/", async( req, res ) => {
 })
 
 
-router.post("/", async ( req, res) => {
-    try {
-        const {name, last_name, email, password_hash} = req.body
-        const user = await User.create({name, last_name, email, password_hash })
-        res.status(201).json(user)
-
-    } catch (err) {
-        res.status(400).json({error: err})
-    } 
-})
 
 router.get("/:id", async (req, res) => {
 
