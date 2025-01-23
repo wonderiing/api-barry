@@ -7,12 +7,12 @@ import incomesRouter from "./routes/incomesRoutes.js"
 import expensesRoutes from "./routes/expensesRoutes.js"
 import aiRoutes from "./routes/aiRoutes.js"
 import notificactionRoutes from "./routes/notificactionRoutes.js"
-
+import cors  from "cors"
 dotenv.config();
 
 const app = express();
 
-
+app.use(cors())
 app.use(express.json());
 syncDatabase()
 
