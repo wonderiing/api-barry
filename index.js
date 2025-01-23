@@ -9,6 +9,7 @@ import aiRoutes from "./controllers/aiRoutes.js"
 import notificactionRoutes from "./controllers/notificactionRoutes.js"
 import cors  from "cors"
 import authController from "./controllers/authController.js"
+import aiController from './controllers/chatgpt/aiController.js'
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use("/api/expenses", expensesRoutes)
 app.use("/api/ai", aiRoutes)
 app.use("/api/notifications", notificactionRoutes)
 app.use("/api/auth/", authController)
+app.use('/api/chatgpt', aiController )
 
 const PORT = process.env.PORT || 3000;
 

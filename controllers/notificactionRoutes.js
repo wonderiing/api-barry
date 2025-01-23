@@ -2,6 +2,10 @@ import { Router } from "express";
 import Notifications from "../models/notifications.js";
 import authMiddlware from '../middlewares/authMiddleware.js'
 
+import dotenv from 'dotenv';
+
+dotenv.config()
+
 const router = Router()
 router.use(authMiddlware)
 
@@ -16,6 +20,7 @@ router.get("/", async (req, res) => {
 
     try {
         const notifications = await Notifications.findAll()
+        console.log("API Key:", process.env.OPENAI_API_KEY);
 
         res.json(notifications)
 
