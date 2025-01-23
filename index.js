@@ -1,12 +1,12 @@
 import express from "express"
 import dotenv from "dotenv"
-import userRoutes from "./routes/userRoutes.js"
-import categoryRoutes from "./routes/categoryRoutes.js"
+import userRoutes from "./controllers/userRoutes.js"
+import categoryRoutes from "./controllers/categoryRoutes.js"
 import syncDatabase from "./config/syncDatabase.js";
-import incomesRouter from "./routes/incomesRoutes.js"
-import expensesRoutes from "./routes/expensesRoutes.js"
-import aiRoutes from "./routes/aiRoutes.js"
-import notificactionRoutes from "./routes/notificactionRoutes.js"
+import incomesRouter from "./controllers/incomesRoutes.js"
+import expensesRoutes from "./controllers/expensesRoutes.js"
+import aiRoutes from "./controllers/aiRoutes.js"
+import notificactionRoutes from "./controllers/notificactionRoutes.js"
 import cors  from "cors"
 dotenv.config();
 
