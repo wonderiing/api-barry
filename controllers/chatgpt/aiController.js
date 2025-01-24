@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { Router } from "express";
 import dotenv from 'dotenv';
-
+import authMiddleware from "../../middlewares/authMiddleware.js";
 dotenv.config()
 
 const openai = new OpenAI({
@@ -11,6 +11,9 @@ const openai = new OpenAI({
 
 
 const router = Router()
+
+router.use(authMiddleware)
+
 router.post('/', async(req,res) => {
 
   try {
@@ -20,13 +23,13 @@ router.post('/', async(req,res) => {
       const completion = await openai.chat.completions.create({
               model: "gpt-3.5-turbo",
               messages: [
-                  { role: "system", content: "You are a financial expert. Answer with precise investment and tax strategies." },
+                  { role: "system", content: "You are a financial expert named Barry. Answer with precise investment and tax strategies." },
                   {
                       role: "user",
                       content: message,
                   },
               ],
-              max_tokens: 200,
+              max_tokens: 250,
           });
       res.json(completion.choices[0].message);
   } catch ( err ) {
