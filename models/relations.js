@@ -4,6 +4,8 @@ import Incomes from "./incomes.js";
 import Expense from "./expenses.js";
 import Notifications from "./notifications.js";
 import aiRecommendations from "./aiRecommendations.js";
+import CryptoInvestments from "./cryptoInvestment.js";
+import Crypto from "./crypto.js";
 
 // Relación de Incomes con User
 User.hasMany(Incomes, { foreignKey: "user_id", onDelete: "CASCADE" });
@@ -24,5 +26,9 @@ Notifications.belongsTo(User, { foreignKey: "user_id", onDelete: "CASCADE" });
 User.hasMany(aiRecommendations, { foreignKey: "user_id", onDelete: "CASCADE" });
 aiRecommendations.belongsTo(User, { foreignKey: "user_id", onDelete: "CASCADE" });
 
+User.hasMany(CryptoInvestments, {foreignKey: "user_id", onDelete: "CASCADE"})
+CryptoInvestments.belongsTo(User, {foreignKey: "user_id", onDelete: "CASCADE"})
+Crypto.hasMany(CryptoInvestments, {foreignKey: "crypto_id", onDelete: "CASCADE"})
+CryptoInvestments.belongsTo(Crypto, {foreignKey: "crypto_id", onDelete: "CASCADE"})
 
-export { User, Incomes, Category, Expense, Notifications, aiRecommendations };
+export { User, Incomes, Category, Expense, Notifications, aiRecommendations, Crypto, CryptoInvestments};

@@ -10,6 +10,8 @@ import notificactionRoutes from "./controllers/notificactionRoutes.js"
 import cors  from "cors"
 import authController from "./controllers/authController.js"
 import aiController from './controllers/chatgpt/aiController.js'
+import cryptoController from './controllers/cryptoController.js'
+import cryptoInvestmentsController from './controllers/cryptoInvestmentController.js'
 
 dotenv.config();
 
@@ -27,6 +29,8 @@ app.use("/api/ai", aiRoutes)
 app.use("/api/notifications", notificactionRoutes)
 app.use("/api/auth/", authController)
 app.use('/api/chatgpt', aiController )
+app.use('/api/crypto', cryptoController )
+app.use('/api/crypto-investments', cryptoInvestmentsController )
 
 const PORT = process.env.PORT || 3000;
 
