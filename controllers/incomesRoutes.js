@@ -88,6 +88,17 @@ router.put("/:id" , async ( req , res) => {
  
 })
 
+router.get("/user/:id", async (req,res) => {
+    try{
+        const expensesByUser = await Incomes.findAll({
+            where: {user_id: req.params.id},
+        } )
+        res.json(expensesByUser)
+    } catch(err) {
+        res.status(500).json({error: err})
+    }
+})
+
 router.delete("/:id", async ( req , res ) => {
 
     try {

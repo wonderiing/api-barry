@@ -45,6 +45,24 @@ router.post("/", async ( req , res) => {
     }
 })
 
+router.get("/user/:id", async (req,res) => {
+    try{
+        const expensesByUser = await Expense.findAll({
+            where: {user_id: req.params.id},
+            include: [
+                {
+
+                    model: Category,
+                    attributes: ['name']
+                }
+            ]
+        } )
+        res.json(expensesByUser)
+    } catch(err) {
+        res.status(500).json({error: err})
+    }
+})
+
 
 router.get("/:id" , async (req, res ) => {
 
