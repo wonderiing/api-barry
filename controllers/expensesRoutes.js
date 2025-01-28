@@ -9,7 +9,12 @@ router.use(authMiddlware)
 
 const getExpenseById = async ( id ) => {
 
-    const expense = await Expense.findByPk(id)
+    const expense = await Expense.findByPk(id, {
+        include: {
+            model: Category,
+            attributes: ['name']
+        }
+    })
     return expense
 }
 
