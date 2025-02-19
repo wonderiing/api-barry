@@ -2,6 +2,8 @@ import { Router } from "express";
 import Incomes from "../models/incomes.js";
 import User from "../models/usuario.js";
 import authMiddlware from '../middlewares/authMiddleware.js'
+import { Op } from "sequelize";
+
 
 const router = Router()
 
@@ -115,5 +117,39 @@ router.delete("/:id", async ( req , res ) => {
         res.status(500).json({error: err})
     }
 })
+
+router.post('/month', async(req, res) => {
+    try {
+
+        const {year, month, userId} = req.body
+
+        if (!year || !month) {
+            res.status(400).json({error: "Debes proporcionar fechas validas"})
+        }
+
+        const startDate = new Date(year,month - 1, 1)
+        const endDate = new Date(year,month, 0, 23, 59, 59)
+
+        const expense = await Incomes.findAll({
+            where: {
+                date: {
+                    [Op.between]: [startDate, endDate]
+                },
+                user_id: userId
+            }
+            
+        })
+
+        if (!expense) return res.status(404).json({error: "no incomes found in that month"})
+   
+        const totalMount = expense.map(exp => Number(exp.mount));
+        const mountPerMonth = totalMount.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        res.json({"TotalIncomesPerMonth": mountPerMonth})
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+}
+)
 
 export default router;

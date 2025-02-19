@@ -5,8 +5,6 @@ import Crypto from "../models/crypto.js";
 const router = Router()
 
 
-
-
 const getCryptoById = async (id) => {
 
     const crypto = await Crypto.findByPk(id)
