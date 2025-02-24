@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:8000/auth/google/callback",
+      callbackURL: "https://proyectofinal-production-6881.up.railway.app/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log("Google Strategy Callback Triggered"); // Add this for debugging
