@@ -36,7 +36,7 @@ router.get(
       });
   
       // Redirige al frontend
-      res.redirect("http://localhost:5173/auth/success");
+      res.redirect("https://barry-fs.netlify.app/auth/success");
     }
   );
   
