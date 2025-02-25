@@ -23,7 +23,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: "https://barry-fs.netlify.app",  
+    origin: ["https://barry-fs.netlify.app", "http://localhost:5173"],  
     methods: ["GET", "POST", "PUT", "DELETE"], 
     credentials: true,  
   }));
