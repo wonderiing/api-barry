@@ -31,7 +31,8 @@ router.get(
   
       res.cookie("jwt", token, {
         httpOnly: true,  
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
+        sameSite: 'none',
         maxAge: 10 * 60 * 60 * 1000  // 10 horas
       });
   
