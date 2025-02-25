@@ -33,7 +33,7 @@ router.get(
     );
 
     // Redirecciona al frontend con el token como parámetro en la URL
-    res.redirect(`https://proyectofinal-production-6881.up.railway.app/auth/success?token=${token}`);
+    res.redirect(`https://barry-fs.netlify.app/auth/success?token=${token}`);
   }
 );
   
