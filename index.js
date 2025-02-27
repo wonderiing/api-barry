@@ -13,6 +13,7 @@ import aiController from './controllers/chatgpt/aiController.js'
 import cryptoController from './controllers/cryptoController.js'
 import cryptoInvestmentsController from './controllers/cryptoInvestmentController.js'
 import googleAuth from './controllers/AUTH/oauthController.js'
+import reportesController from "./controllers/informeController.js"
 import "./controllers/AUTH/oauth.js"; 
 import cookieParser from "cookie-parser";
 
@@ -44,6 +45,7 @@ app.use('/api/chatgpt', aiController )
 app.use('/api/crypto', cryptoController )
 app.use('/api/crypto-investments', cryptoInvestmentsController )
 app.use('', googleAuth )
+app.use('/reportes', reportesController)
 
 const PORT = process.env.PORT || 3000;
 
