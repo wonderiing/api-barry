@@ -24,7 +24,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ["https://barry-fs.netlify.app", "http://localhost:5173"],  
+    origin: ["https://barry-fs.netlify.app", "http://localhost:5173", "https://barry-front.vercel.app"],  
     methods: ["GET", "POST", "PUT", "DELETE"], 
     credentials: true,  
   }));

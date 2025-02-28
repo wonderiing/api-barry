@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 import User from "../../models/usuario.js";
 
 const router = Router();
+dotenv.config();
+
+const FRONTEND = process.env.FRONTEND
 
 router.get(
   "/auth/google",
@@ -32,7 +35,7 @@ router.get(
       { expiresIn: "10h" }
     );
 
-    res.redirect(`https://barry-fs.netlify.app/auth/success?token=${token}`);
+    res.redirect(`${FRONTEND}/auth/success?token=${token}`);
   }
 );
   
