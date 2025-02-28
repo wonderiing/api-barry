@@ -3,6 +3,8 @@ import { Router } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import User from "../../models/usuario.js";
+import dotenv from "dotenv";
+
 
 const router = Router();
 dotenv.config();
