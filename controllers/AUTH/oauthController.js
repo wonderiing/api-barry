@@ -37,7 +37,7 @@ router.get(
       { expiresIn: "10h" }
     );
 
-    res.redirect(`https://barry-front.vercel.app/auth/success?token=${token}`);
+    res.redirect(`https://barry-fs.netlify.app/auth/success?token=${token}`);
   }
 );
   
