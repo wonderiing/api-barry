@@ -30,7 +30,7 @@ router.post('/', async(req,res) => {
                       content: message,
                   },
               ],
-              max_tokens: 250,
+              max_tokens: 500,
           });
         
           const answer = completion.choices[0].message.content;
