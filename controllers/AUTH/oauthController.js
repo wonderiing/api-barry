@@ -32,7 +32,6 @@ router.get(
       { expiresIn: "10h" }
     );
 
-    // Redirecciona al frontend con el token como parámetro en la URL
     res.redirect(`https://barry-fs.netlify.app/auth/success?token=${token}`);
   }
 );

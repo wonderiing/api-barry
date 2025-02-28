@@ -1,5 +1,5 @@
 import passport from "passport";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20"; // Importa correctamente la estrategia
+import { Strategy as GoogleStrategy } from "passport-google-oauth20"; 
 import dotenv from "dotenv";
 import User from "../../models/usuario.js";
 
@@ -14,7 +14,7 @@ passport.use(
       callbackURL: "https://proyectofinal-production-6881.up.railway.app/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("Google Strategy Callback Triggered"); // Add this for debugging
+      console.log("Google Strategy Callback Triggered"); 
       try {
         const user = {
           id: profile.id,

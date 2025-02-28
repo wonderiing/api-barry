@@ -30,7 +30,7 @@ router.post('/', async(req,res) => {
                       content: message,
                   },
               ],
-              max_tokens: 500,
+              max_tokens: 500, //elpepe
           });
         
           const answer = completion.choices[0].message.content;

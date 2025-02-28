@@ -15,7 +15,6 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     autoFirstPage: true
   });
   
-  // Setup event to number all pages after document is completed
   let pageCount = 0;
   doc.on('pageAdded', () => {
     pageCount++;
@@ -23,33 +22,27 @@ export const generatePDF = (expenses, incomes, res, userId) => {
   
   doc.pipe(res);
   
-  // Colores
   const primaryColor = '#3366CC';
   const secondaryColor = '#6699CC';
   const textColor = '#333333';
   
-  // Agregar un header con fecha actual
   const currentDate = new Date().toLocaleDateString();
   doc.fontSize(10).fillColor('#888888').text(`Generado el: ${currentDate}`, { align: 'right' });
   
-  // Título principal
   doc.moveDown();
   doc.fontSize(24).fillColor(primaryColor).text("Reporte Financiero", { align: "center" });
   doc.moveDown();
   
-  // Línea separadora
   doc.strokeColor(primaryColor).lineWidth(1)
     .moveTo(50, doc.y)
     .lineTo(doc.page.width - 50, doc.y)
     .stroke();
   doc.moveDown();
   
-  // Función para crear una tabla simple con manejo de saltos de página
   const createTable = (headers, data, startY) => {
     const columnWidth = (doc.page.width - 100) / headers.length;
     let y = startY;
     
-    // Encabezados de tabla
     doc.y = y;
     doc.fillColor(primaryColor);
     headers.forEach((header, i) => {
@@ -60,23 +53,18 @@ export const generatePDF = (expenses, incomes, res, userId) => {
       );
     });
     
-    // Línea bajo encabezados
     y += 20;
     doc.strokeColor(secondaryColor).lineWidth(0.5)
       .moveTo(50, y)
       .lineTo(doc.page.width - 50, y)
       .stroke();
     
-    // Datos de tabla
     doc.fillColor(textColor);
     data.forEach((row, rowIndex) => {
-      // Check if we need a new page (leave room for row + some margin)
       if (y > doc.page.height - 100) {
         doc.addPage();
-        // Reset y position for new page and redraw headers
         y = 50;
         
-        // Redraw headers on new page
         doc.fillColor(primaryColor);
         headers.forEach((header, i) => {
           doc.fontSize(12).text(header, 
@@ -86,7 +74,6 @@ export const generatePDF = (expenses, incomes, res, userId) => {
           );
         });
         
-        // Línea bajo encabezados
         y += 20;
         doc.strokeColor(secondaryColor).lineWidth(0.5)
           .moveTo(50, y)
@@ -115,14 +102,12 @@ export const generatePDF = (expenses, incomes, res, userId) => {
       });
     });
     
-    return y + 25; // Retorna la posición Y final
+    return y + 25; 
   };
   
-  // Sección de Ingresos
   doc.fontSize(16).fillColor(primaryColor).text("Ingresos", { underline: false });
   doc.moveDown(0.5);
   
-  // Preparar datos para la tabla de ingresos
   const incomeHeaders = ["Fecha", "Descripción", "Monto"];
   const incomeData = incomes.map(income => [
     new Date(income.date).toLocaleDateString(),
@@ -130,32 +115,26 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     `$${parseFloat(income.mount).toFixed(2)}`
   ]);
   
-  // Si no hay ingresos
   if (incomeData.length === 0) {
     doc.fontSize(12).fillColor(textColor).text("No hay registros de ingresos.", { italic: true });
     doc.moveDown();
   } else {
-    // Crear tabla de ingresos
     const newY = createTable(incomeHeaders, incomeData, doc.y);
     doc.y = newY;
     
-    // Calcular total de ingresos
     const totalIncome = incomes.reduce((sum, income) => sum + parseFloat(income.mount), 0);
     doc.moveDown();
     doc.fontSize(12).fillColor(primaryColor).text(`Total de Ingresos: $${totalIncome.toFixed(2)}`, { align: 'right' });
     doc.moveDown(2);
   }
   
-  // Verificar si necesitamos una nueva página para los gastos
   if (doc.y > doc.page.height - 150) {
     doc.addPage();
   }
   
-  // Sección de Gastos
   doc.fontSize(16).fillColor(primaryColor).text("Gastos", { underline: false });
   doc.moveDown(0.5);
   
-  // Preparar datos para la tabla de gastos
   const expenseHeaders = ["Fecha", "Categoría", "Descripción", "Monto"];
   const expenseData = expenses.map(expense => [
     new Date(expense.date).toLocaleDateString(),
@@ -164,29 +143,24 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     `$${parseFloat(expense.mount).toFixed(2)}`
   ]);
   
-  // Si no hay gastos
   if (expenseData.length === 0) {
     doc.fontSize(12).fillColor(textColor).text("No hay registros de gastos.", { italic: true });
     doc.moveDown();
   } else {
-    // Crear tabla de gastos
     const newY = createTable(expenseHeaders, expenseData, doc.y);
     doc.y = newY;
     
-    // Calcular total de gastos
     const totalExpense = expenses.reduce((sum, expense) => sum + parseFloat(expense.mount), 0);
     doc.moveDown();
     doc.fontSize(12).fillColor(primaryColor).text(`Total de Gastos: $${totalExpense.toFixed(2)}`, { align: 'right' });
     doc.moveDown(2);
   }
   
-  // Resumen final
   if (incomes.length > 0 && expenses.length > 0) {
     const totalIncome = incomes.reduce((sum, income) => sum + parseFloat(income.mount), 0);
     const totalExpense = expenses.reduce((sum, expense) => sum + parseFloat(expense.mount), 0);
     const balance = totalIncome - totalExpense;
     
-    // Verificar si necesitamos una nueva página para el resumen
     if (doc.y > doc.page.height - 150) {
       doc.addPage();
     }
@@ -201,7 +175,6 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     doc.fontSize(16).fillColor(primaryColor).text("Resumen", { align: "center" });
     doc.moveDown();
     
-    // Tabla de resumen con alineación y posicionamiento adecuado
     const tableWidth = 300;
     const tableX = (doc.page.width - tableWidth) / 2;
     
@@ -218,7 +191,6 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     doc.fontSize(12).fillColor(balanceColor).text(`$${balance.toFixed(2)}`, tableX + 200, doc.y, { width: 100, align: 'right' });
   }
   
-  // Add page numbers at the end
   let i = 0;
   doc.on('pageAdded', () => {
     const currentPage = i++;
@@ -231,12 +203,9 @@ export const generatePDF = (expenses, incomes, res, userId) => {
     );
   });
   
-  // End the document
   try {
-    // Finalize the document and add page numbers
     doc.end();
     
-    // Set appropriate headers
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `inline; filename=report-${userId}.pdf`);
   } catch (error) {
@@ -246,21 +215,17 @@ export const generatePDF = (expenses, incomes, res, userId) => {
 };
 
 router.use(authMiddlware)
-// 📌 Endpoint para generar PDF de ingresos y gastos
 router.get("/pdf/user/:id", async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Obtener gastos del usuario
     const expenses = await Expense.findAll({
       where: { user_id: userId },
       include: [{ model: Category, attributes: ["name"] }],
     });
 
-    // Obtener ingresos del usuario
     const incomes = await Incomes.findAll({ where: { user_id: userId } });
 
-    // 📄 Generar PDF y enviarlo
     generatePDF(expenses, incomes, res, userId);
   } catch (err) {
     console.error(err);
