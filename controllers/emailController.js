@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Resend } from "resend";
 import dotenv from "dotenv";
-import authMiddleware from "../../middlewares/authMiddleware.js";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 dotenv.config();
 const router = Router()
