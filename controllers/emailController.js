@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     const { data, error } = await resend.emails.send({
       from: "Barry <onboarding@resend.dev>",
       to: ["ca223871@gmail.com"],
-      subject: "hello world",
+      subject: "Ticket - Reporte",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #d50000; color: white; padding: 20px; text-align: center;">
