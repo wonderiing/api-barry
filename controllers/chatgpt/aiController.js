@@ -16,7 +16,10 @@ const router = Router()
 router.use(authMiddleware)
 
 router.post('/', async(req,res) => {
-
+ /**
+  * Recibe 2 datos, el mensaje y el user id, CHATGPT los procesa usando la api de openai y
+  * devuelve una respuesta
+  */
   try { 
       const {userId, message} = req.body
 
@@ -24,13 +27,13 @@ router.post('/', async(req,res) => {
       const completion = await openai.chat.completions.create({
               model: "gpt-3.5-turbo",
               messages: [
-                  { role: "system", content: "You are a financial expert named Barry. Answer with precise investment and tax strategies." },
+                  { role: "system", content: "Eres un expero financiero llamado Barry. Response con precision a las preguntas que se te hagan" },
                   {
                       role: "user",
                       content: message,
                   },
               ],
-              max_tokens: 500, //elpepe
+              max_tokens: 500, 
           });
         
           const answer = completion.choices[0].message.content;
