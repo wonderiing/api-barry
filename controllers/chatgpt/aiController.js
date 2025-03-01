@@ -16,10 +16,6 @@ const router = Router()
 router.use(authMiddleware)
 
 router.post('/', async(req,res) => {
- /**
-  * Recibe 2 datos, el mensaje y el user id, CHATGPT los procesa usando la api de openai y
-  * devuelve una respuesta
-  */
   try { 
       const {userId, message} = req.body
 

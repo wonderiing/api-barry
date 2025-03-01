@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { Resend } from "resend";
 import dotenv from "dotenv";
+import authMiddleware from "../../middlewares/authMiddleware.js";
 
 dotenv.config();
 const router = Router()
 const resend = new Resend(process.env.RESEND_APIKEY);
       
-
+router.use(authMiddleware)
 router.post("/", async (req, res) => {
     const {name, email, type, message} = req.body
     const { data, error } = await resend.emails.send({
