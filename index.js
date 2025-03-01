@@ -15,6 +15,7 @@ import cryptoInvestmentsController from './controllers/cryptoInvestmentControlle
 import googleAuth from './controllers/AUTH/oauthController.js'
 import reportesController from "./controllers/informeController.js"
 import "./controllers/AUTH/oauth.js"; 
+import emailController from './controllers/emailController.js'
 import cookieParser from "cookie-parser";
 
 
@@ -46,6 +47,7 @@ app.use('/api/crypto', cryptoController )
 app.use('/api/crypto-investments', cryptoInvestmentsController )
 app.use('', googleAuth )
 app.use('/reportes', reportesController)
+app.use('/api/send-mail', emailController)
 
 const PORT = process.env.PORT || 3000;
 
