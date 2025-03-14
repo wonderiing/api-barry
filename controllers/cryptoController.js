@@ -16,7 +16,7 @@ router.get("/", async (req , res ) => {
 
         const crypto = await Crypto.findAll()
 
-        res.json(crypto)
+        res.json({"message": "hola"})
 
     } catch (err) {
         res.status(500).json({error: err})
