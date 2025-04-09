@@ -1,4 +1,4 @@
-# Barry - Finance API
+# Barry - Finance API 💸
 
 Barry is a finance management API that allows users to track expenses, register incomes, generate reports, and visualize financial data through charts. It also integrates with OpenAI's ChatGPT API to answer finance-related questions.
 
