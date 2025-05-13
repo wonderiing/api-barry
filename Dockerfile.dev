@@ -1,27 +1,25 @@
-FROM node:20
+FROM node:20-alpine AS builder
 
-# Genericco que dio chatgpt
-RUN apt-get update && apt-get install -y netcat-openbsd
+RUN apk add --no-cache python3 make g++
 
-# Direcctorio donde del contenedor
 WORKDIR /app
 
-# Comando para esperar que mySql este activo
+COPY package*.json ./
+RUN npm ci --only=production
+
+FROM node:20-alpine
+
+RUN apk add --no-cache netcat-openbsd
+
+WORKDIR /app
+
 COPY wait-for-mysql.sh /wait-for-mysql.sh
 RUN chmod +x /wait-for-mysql.sh
 
-# Copiando dependencias e instalando en el
-# directorio del contenedor
-COPY package*.json ./
-RUN npm install
+COPY --from=builder /app/node_modules /app/node_modules
 
-# CAMBIO: Instalación de nodemon globalmente para asegurar que esté disponible
-# (aunque también debería estar en tus dependencias de desarrollo)
+COPY . .
+
 RUN npm install -g nodemon
 
-# ELIMINADO: Ya no copiamos el código al contenedor porque lo montaremos como volumen
-# para que los cambios se reflejen en tiempo real
-# COPY . .
-
-# Corre el comando y cuando este activo mySql corre el npm start
 CMD ["/wait-for-mysql.sh", "mysqldb", "3306", "npm", "run", "dev"]

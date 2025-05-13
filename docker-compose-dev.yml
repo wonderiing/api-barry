@@ -19,7 +19,6 @@ services:
   api:
     build: 
       context: .
-      # AÑADIDO: Especificación explícita del Dockerfile de desarrollo
       dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
