@@ -25,4 +25,4 @@ COPY --from=builder /app /app
 RUN chmod +x /app/wait-for-mysql.sh
 
 # Comando de arranque
-CMD ["/app/wait-for-mysql.sh", "mysqldb", "3306", "npm", "start"]
+CMD ["/app/wait-for-mysql.sh", "db-api.cef2gw4amtq1.us-east-1.rds.amazonaws.com", "3306", "npm", "start"]
