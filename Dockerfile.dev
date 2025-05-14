@@ -22,4 +22,4 @@ COPY . .
 
 RUN npm install -g nodemon
 
-CMD ["/wait-for-mysql.sh", "mysqldb", "3306", "npm", "run", "dev"]
+CMD ["/wait-for-mysql.sh", "db-api.cef2gw4amtq1.us-east-1.rds.amazonaws.com", "3306", "npm", "run", "dev"]
