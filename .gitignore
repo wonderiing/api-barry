@@ -2,3 +2,8 @@
 .env
 .vscode
 /ssl
+
+Dockerfile
+docker-compose.yml
+buildspec.yml
+nginx.conf
