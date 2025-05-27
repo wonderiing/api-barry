@@ -3,13 +3,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import userRoutes from "./src/controllers/userRoutes.js";
-import categoryRoutes from "./src/controllers/categoryRoutes.js";
+import userRoutes from "./src/controllers/userController.js";
+import categoryRoutes from "./src/controllers/categoryController.js";
 import syncDatabase from "./src/config/syncDatabase.js";
-import incomesRouter from "./src/controllers/incomesRoutes.js";
-import expensesRoutes from "./src/controllers/expensesRoutes.js";
+import incomesRouter from "./src/controllers/incomesController.js";
+import expensesRoutes from "./src/controllers/expensesController.js";
 import aiRoutes from "./src/controllers/aiRoutes.js";
-import notificationRoutes from "./src/controllers/notificationRoutes.js";
 import authController from "./src/controllers/AUTH/authController.js";
 import aiController from "./src/controllers/chatgpt/aiController.js";
 import cryptoController from "./src/controllers/cryptoController.js";
