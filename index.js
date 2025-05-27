@@ -1,22 +1,23 @@
-import express from "express"
-import dotenv from "dotenv"
-import userRoutes from "./controllers/userRoutes.js"
-import categoryRoutes from "./controllers/categoryRoutes.js"
-import syncDatabase from "./config/syncDatabase.js";
-import incomesRouter from "./controllers/incomesRoutes.js"
-import expensesRoutes from "./controllers/expensesRoutes.js"
-import aiRoutes from "./controllers/aiRoutes.js"
-import notificactionRoutes from "./controllers/notificactionRoutes.js"
-import cors  from "cors"
-import authController from "./controllers/AUTH/authController.js"
-import aiController from './controllers/chatgpt/aiController.js'
-import cryptoController from './controllers/cryptoController.js'
-import cryptoInvestmentsController from './controllers/cryptoInvestmentController.js'
-import googleAuth from './controllers/AUTH/oauthController.js'
-import reportesController from "./controllers/informeController.js"
-import "./controllers/AUTH/oauth.js"; 
-import emailController from './controllers/emailController.js'
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 import cookieParser from "cookie-parser";
+
+import userRoutes from "./src/controllers/userRoutes.js";
+import categoryRoutes from "./src/controllers/categoryRoutes.js";
+import syncDatabase from "./src/config/syncDatabase.js";
+import incomesRouter from "./src/controllers/incomesRoutes.js";
+import expensesRoutes from "./src/controllers/expensesRoutes.js";
+import aiRoutes from "./src/controllers/aiRoutes.js";
+import notificationRoutes from "./src/controllers/notificationRoutes.js";
+import authController from "./src/controllers/AUTH/authController.js";
+import aiController from "./src/controllers/chatgpt/aiController.js";
+import cryptoController from "./src/controllers/cryptoController.js";
+import cryptoInvestmentsController from "./src/controllers/cryptoInvestmentController.js";
+import googleAuth from "./src/controllers/AUTH/oauthController.js";
+import reportesController from "./src/controllers/informeController.js";
+import emailController from "./src/controllers/emailController.js";
+import "./src/controllers/AUTH/oauth.js";
 
 
 
