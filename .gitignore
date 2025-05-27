@@ -3,7 +3,7 @@
 .vscode
 /ssl
 
-.Dockerfile
-.docker-compose.yml
-.buildspec.yml
-.nginx.conf
+Dockerfile
+docker-compose.yml
+buildspec.yml
+nginx.conf
